@@ -1,0 +1,47 @@
+{% extends 'conversation_base.html' %}
+{% load bootstrap3 %}
+{% load profile_account_templatetags %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Konwersacja pomiędzy użytkownikami <strong>{% render_profile_username conversation.owners.all.0 %}</strong> a <strong>{% render_profile_username conversation.owners.all.1 %}</strong></div>
+    <div class="col-xs-12">
+        <div class="clearfix row-no-padding">
+            {% for message in conversation_messages %}
+                <div class="col-xs-12" style="margin-top: 5px;">
+                    <div style="float: left">
+                        <a href="{% url 'account_profile_detail' message.sender.username %}" class="link-remove-format"><img src="{{ message.sender.settings.avatar.avatar_image_concept.url }}" class="img-responsive"></a>
+                    </div>
+                    <div style="float: left; padding-left: 5px;">
+                        <strong>
+                            {% render_profile_username message.sender %}
+                        </strong>
+                        <br/>
+                        {{ message.created|timesince }} temu
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+                <div class="col-xs-12" style="margin-top: 5px;">
+                    {{ message.content }}
+                </div>
+                <div class="col-xs-12 text-muted text_with_line"></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <form action="{% url 'notification:conversation_create' %}" method="post">
+            {% csrf_token %}
+            <select name="recipient" title="" required="" id="id_recipient" hidden>
+                {% if not conversation.owners.all.0 == user %}
+                    <option value="{{ conversation.owners.all.0.id }}" selected="">{{ conversation.owners.all.0 }}</option>
+                {% else %}
+                    <option value="{{ conversation.owners.all.1.id }}" selected="">{{ conversation.owners.all.1 }}</option>
+                {% endif %}
+            </select>
+            <div class="form-group">
+                <label class="control-label" for="id_content">Treść</label>
+                <textarea name="content" rows="10" title="" required="" cols="40" id="id_content" maxlength="1000" placeholder="Treść" class="form-control"></textarea>
+            </div>
+            <button class="btn btn-primary pull-right">Napisz wiadomość</button>
+        </form>
+    </div>
+{% endblock %}

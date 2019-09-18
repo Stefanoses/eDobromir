@@ -1,0 +1,33 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+
+{% block title %}{{ eureka.title }}{% endblock %}
+
+{% block content_sidebar_left %}
+    {% block step_content_sidebar_left %}
+    {% endblock %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Menu</div>
+    <div class="col-xs-12">
+        <ul class="instruction_nav nav ">
+            {% for step in eureka.eurekaInstruction.steps.all %}
+                <li {% if step.step_slug == object.step_slug %}class="active"{% endif %}>
+                    <a href="{% url 'eureka:eureka_instruction_step_update' slug=eureka.slug step_slug=step.step_slug %}">{{ step.title }}</a>
+                </li>
+            {% empty %}
+                <li class="alert alert-warning">Pusto! Dodaj jakieś kroki.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-xs-12 text-muted text_with_line">Opcje</div>
+    <div class="col-xs-12">
+        <div class="btn-group btn-group-justified">
+            <a href="{% url 'eureka:eureka_instruction_step_create' slug=eureka.slug %}" class="btn btn-warning"><i class="fa fa-plus" aria-hidden="true"></i> Nowy krok</a>
+            <a href="{% url 'eureka:eureka_summary' slug=eureka.slug %}"  class="btn btn-primary form-control"><i class="fa fa-list-alt"></i> Zarządzaj</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'eureka_base.html' %}
+{% load static %}
+{% load imagekit %}
+{% load eureka_templatetags %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Eureka</div>
+    {% render_eureka_preview_big eureka %}
+
+    <div class="col-xs-12 text-muted text_with_line">Instrukcja</div>
+    {% for step in eureka.eurekaInstruction.steps.all %}
+        <div class="col-xs-12" id="{{ step.step_slug }}">
+            <h2>{{ step.title }}</h2>
+            {{ step.content|safe }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-md-12 text-muted text_with_line hidden-xs hidden-sm">Menu</div>
+    <div class="col-xs-12 scrollspy hidden-xs hidden-sm">
+        <ul id="nav" class="instruction_nav nav hidden-xs hidden-sm" data-spy="affix">
+            {% for step in eureka.eurekaInstruction.steps.all %}
+                <li><a href="#{{ step.step_slug }}">{{ step.title }}</a></li>
+            {% endfor %}
+        </ul>
+         <div id="affix-stop" style="height:10px;"></div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+            $('#nav').affix({
+            offset: {
+              top: $('#nav').offset().top,
+              bottom: ($('#footer').outerHeight(true)) + 40,
+            }
+        });
+            $("#instruction_content").css("height", $('#instruction_content').outerHeight(true));
+    </script>
+{% endblock %}

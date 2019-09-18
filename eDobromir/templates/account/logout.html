@@ -1,0 +1,21 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load i18n %}
+{% load account %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+
+{% block title %}Wylogowywanie{% endblock %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Wylogowywanie</div>
+    <div class="col-xs-12">
+        Czy jesteś pewien, że chcesz się wylogować?
+        <form action="{% url 'account_logout' %}" method="POST" class="form" id="logout_form">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button class="btn btn-danger pull-right" type="submit">Wyloguj</button>
+        </form>
+    </div>
+{% endblock %}

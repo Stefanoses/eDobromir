@@ -1,0 +1,27 @@
+{% load profile_account_templatetags %}
+{% load notification_templatetags %}
+
+<div class="col-xs-12">
+    <div class="media">
+        <div class="media-left text-center">
+            <img src="{{ profile.settings.avatar.avatar_image_concept.url }}" class="media-object" style="width:40px">
+        </div>
+        <div class="media-body">
+            <small><i class="fa fa-trophy" aria-hidden="true"></i>{{ profile_position }}</small><strong>{% render_profile_username profile %} </strong>
+            <small class="pull-right">
+                <a href="{% url 'account_profile_activity_eureka' profile.username %}" class="link-tab"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> {{ profile_eureka_count }}</a>
+                <a href="{% url 'account_profile_activity_concept' profile.username %}" class="link-tab"><i class="fa fa-circle-o" aria-hidden="true"></i> {{ profile_concept_count }}</a>
+                <a href="{% url 'account_profile_activity_followers' profile.username %}" class="link-tab"><i class="fa fa-users" aria-hidden="true"></i> {{ profile_observe_count }}</a>
+                <i class="fa fa-star-half-o" aria-hidden="true"></i> {{ profile.rank.points }}
+            </small>
+            <p>
+                <small>
+                    {% render_notification_followers profile %}
+                    <span class="pull-right text-muted">
+                        {{ profile.date_joined|date }}
+                    </span>
+                </small>
+            </p>
+        </div>
+    </div>
+</div>

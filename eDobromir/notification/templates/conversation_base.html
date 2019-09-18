@@ -1,0 +1,42 @@
+{% extends 'dashboard_sidebar_base.html' %}
+{% load bootstrap3 %}
+{% load profile_account_templatetags %}
+
+{% block content_sidebar_left %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Wszystkie konwersacje</div>
+    <div class="col-xs-12">
+        <a href="{% url 'notification:conversation_create' %}" class="btn btn-default form-control">Nowa konwersacja</a>
+        <div class="clearfix row-no-padding">
+            {% for conversation in conversations %}
+                {% for owner in conversation.owners.all %}
+                    {% if not owner == user %}
+                        <div class="col-xs-12" style=" margin-top: 10px;">
+                            <div style="float: left">
+                                <a href="{% url 'notification:conversation_detail' conversation.id %}" class="link-remove-format"><img src="{{ owner.settings.avatar.avatar_image_concept.url }}" class="img-responsive"></a>
+                            </div>
+                            <div style="float: left; padding-left: 5px;">
+                                <strong>
+                                    <a href="{% url 'notification:conversation_detail' conversation.id %}" class="link-remove-format">
+                                        {% render_profile_username_clean owner %}
+                                    </a>
+                                </strong>
+                                {% if not user in conversation.seeed.all %}
+                                    <span class="label label-success">Nowa</span>
+                                {% endif %}
+                            </div>
+                            <br/>
+                            <div style="float: left; padding-left: 5px;">
+                                {{ conversation.modified|timesince }} temu
+                            </div>
+                            <small class="pull-right"><a href="{% url 'notification:conversation_detail' conversation.id %}" class="link-tab"><i class="fa fa-eye" aria-hidden="true"></i>Pokaż</a></small>
+                            <div style="clear: left;"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

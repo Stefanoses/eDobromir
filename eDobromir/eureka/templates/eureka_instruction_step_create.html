@@ -1,0 +1,17 @@
+{% extends 'eureka_instruction_step_base.html' %}
+
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+
+{% block step_content_sidebar_left %}
+    <div class="col-md-12 text-muted text_with_line">Dodaj krok</div>
+    <div class="col-xs-12">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% bootstrap_field form.title %}
+            {% bootstrap_field form.content %}
+            <button type="submit" class="btn btn-primary pull-right">Zapisz</button>
+        </form>
+    </div>
+{% endblock %}

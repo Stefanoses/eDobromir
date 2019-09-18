@@ -1,0 +1,33 @@
+{% extends 'profile_settings_base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Udostępnione informacje{% endblock %}
+
+{% block settings_content_sidebar_left %}
+    <div class="clearfix row-no-padding">
+        <div class="col-md-12 text-muted text_with_line">Udostępnione informacje</div>
+        <div class="col-xs-12">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="clearfix">
+                    <div class="col-xs-6">
+                        {% bootstrap_field form.name %}
+                        {% bootstrap_field form.last_name %}
+                        {% bootstrap_field form.public_email addon_before='<span class="fa fa-envelope-o"></span>' %}
+                        {% bootstrap_field form.website addon_before='<span class="fa fa-globe"></span>' %}
+                        {% bootstrap_field form.town addon_before='<span class="fa fa-building-o"></span>' %}
+                    </div>
+                    <div class="col-xs-6">
+                        {% bootstrap_field form.social_facebook addon_before='<span class="fa fa-facebook-official"></span>' %}
+                        {% bootstrap_field form.social_twitter addon_before='<span class="fa fa-twitter"></span>' %}
+                        {% bootstrap_field form.social_google_plus addon_before='<span class="fa fa-google"></span>' %}
+                        {% bootstrap_field form.social_linkedin addon_before='<span class="fa fa-linkedin"></span>' %}
+                        {% bootstrap_field form.social_youtube addon_before='<span class="fa fa-youtube"></span>' %}
+                    </div>
+                </div>
+                {% bootstrap_field form.description %}
+                <button class="btn btn-primary pull-right" type="submit">Zapisz</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

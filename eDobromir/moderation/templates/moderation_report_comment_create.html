@@ -1,0 +1,10 @@
+{% load bootstrap3 %}
+
+<a class="create_report_content_link link-tab {% if was_report %}link-tab-active{% endif %}" data-toggle="modal" data-target="#content_report_create_modal" data-action="{% block form_url %}{% endblock %}">
+    {% if not was_report %}
+        <i class="fa fa-flag-o" aria-hidden="true"></i>
+    {% else %}
+        <i class="fa fa-flag" aria-hidden="true"></i>
+    {% endif %}
+    Zgłoś
+</a>

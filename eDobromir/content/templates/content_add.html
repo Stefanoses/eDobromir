@@ -1,0 +1,41 @@
+{% extends 'dashboard_two_column_base.html' %}
+{% load static %}
+
+{% block title %}Dodaj{% endblock %}
+
+{% block content_column_left %}
+    <div class="col-xs-12 text-muted text_with_line">Dodaj eurekę</div>
+    <div class="col-xs-12" id="content_bg_eureka">
+        <p>
+            Eureka to coś przełomowego, plan wykonania, instrukcja, czy też ciekawostka.
+            Nie ważne czy jesteś programistą, ogrodnikiem czy też kucharzem,
+            na pewno jest coś w Twoim zawodzie co potrafisz tylko Ty lub też zajmesz się tym hobbistycznie, a chciałbyś podzielić się tym z innymi.
+        </p>
+        <p>
+            Możesz zamieścić już gotowe rozwiązanie, w postaci linku do artykułu czy też filmu.
+            Natomiast jeśli wolisz napisać coś od siebie, narzędzia na tej stronie pozwolą Ci w łatwy sposób to zrobić.
+        </p>
+        <p>
+            <a href="{% url 'eureka:eureka_create' %}" class="btn btn-primary form-control">Dodaj eurekę</a>
+        </p>
+    </div>
+{% endblock %}
+
+{% block content_column_right %}
+    <div class="col-xs-12 text-muted text_with_line">Dodaj koncepcję</div>
+    <div class="col-xs-12" id="content_bg_concept">
+        <p>
+            Koncepcja jest zalążkiem, początkiem do dyskusji.
+            Jeśli nie jesteś pewien czy poradnik który chcesz napisać przyda się komuś, zapytaj.
+            Masz może problem w jakiejś dziedzinie, my Ci pomożemy.
+            Chciałbyś napisać coś ciekawego ze świata, na pewno nas to zainteresuje.
+            Możesz się z nami podzielić każdą myślą.
+        </p>
+        <p>
+            Pamiętaj o odpowiednim otagowaniu swojej koncepcji (np.: robotyka), w ten sposób większa grupa osób zainteresowanych tym tematem co Ty, zobaczy ten pomysł, i będzie mogła Ci pomóc.
+        </p>
+        <p>
+            <a href="{% url 'concept:concept_create' %}" class="btn btn-default form-control">Dodaj koncepcje</a>
+        </p>
+    </div>
+{% endblock %}

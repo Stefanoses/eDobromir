@@ -1,0 +1,17 @@
+{% load profile_account_templatetags %}
+
+<a href="{% url 'concept:concept_detail' comment_object.slug %}#{{ node.slug }}" class="link-remove-format">
+    <img src="{{ node.created_by.settings.avatar.avatar_image_comment.url }}" class="media-object" style="width:15px; float: left;">
+</a>
+<strong style="clear: left;">
+    <a href="{% url 'concept:concept_detail' comment_object.slug %}#{{ node.slug }}" class="link-remove-format">
+    &nbsp; {% render_profile_username node.created_by %}
+    </a>
+</strong>
+<sup class="text-muted">
+    {{ node.created }}
+    <i class="fa fa-chevron-up" aria-hidden="true"></i> {{ node.votes.count }}
+</sup>
+{% autoescape on %}
+    {{ node.content|safe|truncatechars_html:130 }}
+{% endautoescape %}

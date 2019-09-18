@@ -1,0 +1,60 @@
+{% load tags_concept %}
+{% load tags_vote %}
+{% load comments_templatetags %}
+{% load tags_templatetags %}
+{% load moderation_templatetags %}
+{% load profile_account_templatetags %}
+{% load notification_templatetags %}
+{% load favorites_templatetags %}
+
+<div class="col-xs-12">
+    <div class="clearfix row-no-padding">
+        <div class="col-sm-1 col-xs-2 text-center">
+            <div style="padding-right: 10px;" class="vote_body">
+                {% autoescape off %}
+                {% render_vote_concept concept %}
+                {% endautoescape %}
+            </div>
+        </div>
+        <div class="col-sm-11 col-xs-10">
+            <div>
+                <div style="float: left">
+                    <a href="{% url 'concept:concept_detail' concept.slug %}" class="link-remove-format"><img src="{{ concept.created_by.settings.avatar.avatar_image_concept.url }}" class="img-responsive"></a>
+                </div>
+                <div style="float: left; padding-left: 5px;">
+                    <strong>
+                        {% render_profile_username concept.created_by %}
+                    </strong>
+                    <sup class="text-muted">
+                        {{ concept.created }}
+                    </sup>
+                    <br/>
+                    {% if concept.sympathizers %}
+                        {% render_sympathizer_preview_less concept.sympathizers.name %}
+                    {% endif %}
+                    {% for tag in concept.tags.all %}
+                        {% render_tag_preview_less tag %}
+                    {% endfor %}
+                </div>
+                <div style="clear: left;">
+
+                </div>
+
+                <p style="clear: left;">{{ concept.content|safe|truncatechars_html:600 }}</p>
+                <p>
+                    <small class="text-muted">
+                        {% render_notification_followers concept.created_by %}
+                        {% render_favorites_manager_concept concept %}
+                        {% render_moderation_report_concept_create concept %}
+                    </small>
+                </p>
+                {% render_popular_comments_list concept 2 %}
+
+                <p class="text-center">
+                    <small><a href="{% url 'concept:concept_detail' concept.slug %}" class="link-tab">Wszystkie komentarze</a> <sup class="text-muted">{{ concept.comments.count }}</sup></small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+

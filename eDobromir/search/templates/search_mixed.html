@@ -1,0 +1,80 @@
+{% extends 'search_base.html' %}
+{% load static %}
+{% load tags_concept %}
+{% load eureka_templatetags %}
+{% load render_table from django_tables2 %}
+{% load querystring from django_tables2 %}
+{% load trans blocktrans from i18n %}
+{% load bootstrap3 %}
+{% load tags_concept %}
+{% load tags_templatetags %}
+
+{% block title %}Szukaj{% endblock %}
+
+{% block recent_content_sidebar_top %}
+    <div class="col-xs-12">
+        <a href="?sort=-published&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if table.order_by|safe == '-published' %}link-tab-active{% endif %}">
+            <i class="fa fa-hand-rock-o" aria-hidden="true"></i> Najnowsze
+        </a>
+        <a href="?sort=-active&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if table.order_by|safe == '-active' %}link-tab-active{% endif %}">
+            <i class="fa fa fa-hand-spock-o" aria-hidden="true"></i> Aktywne
+        </a>
+        <a href="?sort=-popular&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if table.order_by|safe == '-popular' %}link-tab-active{% endif %}">
+            <i class="fa fa fa-hand-scissors-o" aria-hidden="true"></i> Popularne
+        </a>
+    </div>
+{% endblock %}
+
+{% block search_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Szukaj</div>
+    <div class="col-xs-12">
+        <form action="" method="GET">
+            <div class="form-group has-success">
+                <label class="sr-only control-label" for="id_search_input">
+                    Co cię interesuje? @użytkownik, #tag lub treść czy tytuł
+                </label>
+                <input class="form-control" id="id_search_input" maxlength="100" name="search_input" placeholder="Co cię interesuje? @użytkownik, #tag" title="" type="text" value="{{ search_input|safe }}">
+            </div>
+            <input type="hidden" name="sort" value="{{ how }}">
+            <input type="hidden" name="when" value="{{ when }}">
+            <button type="submit" class="btn btn-primary pull-right">Szukaj</button>
+        </form>
+    </div>
+    {% if sympathizers %}
+        <div class="col-xs-12 text-muted text_with_line">Tagi sympatyków</div>
+        <div class="col-xs-12">
+            {% for sympathizer in sympathizers %}
+                {% render_sympathizer_preview_more sympathizer %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if tags %}
+        <div class="col-xs-12 text-muted text_with_line">Tagi</div>
+        <div class="col-xs-12">
+            {% for tag in tags %}
+                {% render_tag_preview_more tag %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block find_content %}
+    {% endblock %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Gdzie</div>
+    <div class="col-xs-12">
+        <a href="{% url 'search:search_mixed_eureka' %}?sort={{ how }}&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if where == 'eureka' %}link-tab-active{% endif %}">Główna</a><br/>
+        <a href="{% url 'search:search_mixed_eureka_waiting' %}?sort={{ how }}&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if where == 'eureka_waiting' %}link-tab-active{% endif %}">Poczekalnia</a><br/>
+        <a href="{% url 'search:search_mixed_concept' %}?sort={{ how }}&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if where == 'concept' %}link-tab-active{% endif %}">Koncepcje</a><br/>
+        <a href="{% url 'search:search_mixed_everywhere' %}?sort={{ how }}&when={{ when }}&search_input={{ search_input|urlencode }}" class="link-tab {% if where == 'everywhere' %}link-tab-active{% endif %}">Wszędzie</a><br/>
+    </div>
+    <div class="col-xs-12 text-muted text_with_line">Kiedy</div>
+    <div class="col-xs-12">
+        <a href="?sort={{ how }}&when=day&search_input={{ search_input|urlencode }}" class="link-tab {% if when == 'day' %}link-tab-active{% endif %}">Dzień</a><br/>
+        <a href="?sort={{ how }}&when=week&search_input={{ search_input|urlencode }}" class="link-tab {% if when == 'week' %}link-tab-active{% endif %}">Tydzień</a><br/>
+        <a href="?sort={{ how }}&when=month&search_input={{ search_input|urlencode }}" class="link-tab {% if when == 'month' %}link-tab-active{% endif %}">Miesiąc</a><br/>
+        <a href="?sort={{ how }}&when=year&search_input={{ search_input|urlencode }}" class="link-tab {% if when == 'year' %}link-tab-active{% endif %}">Rok</a><br/>
+        <a href="?sort={{ how }}&when=eternity&search_input={{ search_input|urlencode }}" class="link-tab {% if when == 'eternity' %}link-tab-active{% endif %}">Wieczność</a>
+    </div>
+{% endblock %}

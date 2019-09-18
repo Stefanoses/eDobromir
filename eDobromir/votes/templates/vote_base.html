@@ -1,0 +1,21 @@
+<div class="{% block vote_area_id %}{% endblock %}">
+    <strong style="{% block vote_font_size %}{% endblock %}">
+        <div class="clearfix row-no-padding">
+            <div class="col-xs-12">
+                <a href="{% if not object.mask.is_delete %}{% if not was_voting %}{% block vote_up_url %}{% endblock %}{% else %}{% block vote_down_url %}{% endblock %}{% endif %}{% else %}#{% endif %}" class="link-tab {% if was_voting %}link-tab-active{% endif %} {% if not object.mask.is_delete %}ajax_link{% endif %}" data-id="{% if not was_voting %}{% block vote_up_link_id %}{% endblock %}{% else %}{% block vote_down_link_id %}{% endblock %}{% endif %}">
+                    {% block vote_up_icon %}
+                    {% endblock %}
+                </a>
+            </div>
+            <div class="col-xs-12" style="{% block vote_count_font_size %}{% endblock %}">
+                {% block vote_count %}
+                    {{ object.votes.count }}
+                {% endblock %}
+            </div>
+            <div class="col-xs-12">
+                {% block vote_down %}
+                {% endblock %}
+            </div>
+        </div>
+    </strong>
+</div>

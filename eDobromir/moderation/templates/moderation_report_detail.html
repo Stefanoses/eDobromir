@@ -1,0 +1,47 @@
+{% load bootstrap3 %}
+{% load static %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+{% load profile_account_templatetags %}
+
+<p>
+    Zgłosili <strong>{{ reportObject.moderations.count|default:'0' }}</strong>
+    <small class="pull-right">
+        <a type="button"
+                class="vote_detail_link link-tab"
+                data-toggle="modal"
+                data-target="#report_detail_modal">
+            <i class="fa fa-eye" aria-hidden="true"></i> Pokaż
+        </a>
+    </small>
+</p>
+
+<div class="modal" id="report_detail_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Użytkownik</th>
+                            <th>Dzień</th>
+                            <th>Powód</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for moderation in reportObject.moderations.all %}
+                            <tr>
+                                <td>{% render_profile_username moderation.created_by %}</td>
+                                <td>{{ moderation.created }}</td>
+                                <td>{{ moderation.choiceReason }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>

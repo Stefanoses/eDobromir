@@ -1,0 +1,29 @@
+{% load bootstrap3 %}
+{% load static %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+
+<div class="modal" id="linked_create_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% if not request.user.is_authenticated %}
+                    <div class="alert alert-warning">
+                        Musisz być zalogowanym by móc dodawać powiązane. <a href="{% url 'account_login_signup' %}">Zaloguj się</a>
+                    </div>
+                {% else %}
+                    <form action="{% url 'linked:linked_concept_create' linkedObject.slug %}" method="POST" id="linked_create_form">
+                        {% csrf_token %}
+                        {% bootstrap_form form show_label=False %}
+                    </form>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                {% if request.user.is_authenticated %}
+                    <button type="submit" class="btn btn-primary" form="linked_create_form"><i class="fa fa-plus" aria-hidden="true"></i>Dodaj</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

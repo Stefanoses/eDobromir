@@ -1,0 +1,8 @@
+{% load bootstrap3 %}
+{% load static %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+
+<p>
+    Odsłon <strong>{{ diaryObject.diarys.all.count|default:'0' }}</strong>
+</p>

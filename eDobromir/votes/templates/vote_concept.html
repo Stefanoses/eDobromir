@@ -1,0 +1,15 @@
+{% extends 'vote_concept_base.html' %}
+
+{% block vote_font_size %}font-size: 45px;{% endblock %}
+
+{% block vote_count_font_size %}font-size: 25px;{% endblock %}
+
+{% block vote_area_id %}vote_concept_{{ object.slug }}{% endblock %}
+
+{% block vote_up_url %}{% url 'votes:vote_up_concept' object.slug %}{% endblock %}
+
+{% block vote_down_url %}{% url 'votes:vote_down_concept' object.slug %}{% endblock %}
+
+{% block vote_up_link_id %}vote_concept_{{ object.slug }}{% endblock %}
+
+{% block vote_down_link_id %}vote_concept_{{ object.slug }}{% endblock %}

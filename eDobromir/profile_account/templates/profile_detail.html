@@ -1,0 +1,91 @@
+{% extends 'profile_base.html' %}
+
+{% load static %}
+{% load account %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+
+{% block title %}Użytkownik {{ object }}{% endblock %}
+
+{% block profile_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">
+        Udostępnione informacje
+        {% if user == object %}
+            <span class="pull-right">
+                <a href="{% url 'account_settings_profile' %}"><small>Ustawienia</small></a>
+            </span>
+        {% endif %}
+    </div>
+    <div class="col-xs-12">
+        <div class="clearfix row-no-padding">
+            <div class="col-sm-4">
+                <span class="text-muted">Imię:</span> {{ object.settings.profile.name }}
+            </div>
+            <div class="col-sm-4">
+                <span class="text-muted">Nazwisko:</span> {{ object.settings.profile.last_name }}
+            </div>
+            <div class="col-sm-4">
+                <span class="text-muted">E-mail:</span> {{ object.settings.profile.public_email }}
+            </div>
+            <div class="col-sm-4">
+                <span class="text-muted">WWW:</span> <a href="{{ object.settings.profile.website }}">{{ object.settings.profile.website }}</a>
+            </div>
+            <div class="col-sm-4">
+                <span class="text-muted">Media:</span>
+                {% if object.settings.profile.social_facebook %}
+                    <a href="{{ object.settings.profile.social_facebook }}" class="link-tab">
+                        <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+                {% if object.settings.profile.social_twitter %}
+                    <a href="{{ object.settings.profile.social_twitter }}" class="link-tab">
+                        <i class="fa fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+                {% if object.settings.profile.social_google_plus %}
+                    <a href="{{ object.settings.profile.social_google_plus }}" class="link-tab">
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+                {% if object.settings.profile.social_linkedin %}
+                    <a href="{{ object.settings.profile.social_linkedin }}" class="link-tab">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+                {% if object.settings.profile.social_youtube %}
+                    <a href="{{ object.settings.profile.social_youtube }}" class="link-tab">
+                        <i class="fa fa-youtube" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                <span class="text-muted">Miasto:</span> {{ object.settings.profile.town }} <br/>
+            </div>
+
+            <div class="col-sm-12" style="margin-top: 10px;">
+                {{ object.settings.profile.description }}
+            </div>
+            <div class="col-xs-12 text-muted text_with_line">Aktywność</div>
+            <div class="col-xs-4 text-center">
+                <a href="{% url 'account_profile_activity_eureka' object.username %}" class="link-tab {% if active_activity == 'eureka' %}link-tab-active{% endif %}">
+                    <i class="fa fa-lightbulb-o" aria-hidden="true" style="font-size: 90px;"></i><br/>
+                    <span style="font-size: 50px;">{{ eureka_actions }}</span>
+                </a>
+            </div>
+            <div class="col-xs-4 text-center">
+                <a href="{% url 'account_profile_activity_concept' object.username %}" class="link-tab {% if active_activity == 'concept' %}link-tab-active{% endif %}">
+                    <i class="fa fa-circle-o" aria-hidden="true" style="font-size: 90px;"></i><br/>
+                    <span style="font-size: 50px;">{{ concept_actions }}</span>
+                </a>
+            </div>
+            <div class="col-xs-4 text-center">
+                <a href="{% url 'account_profile_activity_followers' object.username %}" class="link-tab {% if active_activity == 'notification' %}link-tab-active{% endif %}">
+                    <i class="fa fa-users" aria-hidden="true" style="font-size: 90px;"></i><br/>
+                    <span style="font-size: 50px;">{{ observe_actions }}</span>
+                </a>
+            </div>
+            {% block profile_detail_bottom_content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

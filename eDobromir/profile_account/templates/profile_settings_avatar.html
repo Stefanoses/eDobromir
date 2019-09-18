@@ -1,0 +1,18 @@
+{% extends 'profile_settings_base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}Zmiana zdjęcia profilowego{% endblock %}
+
+{% block settings_content_sidebar_left %}
+<div class="clearfix row-no-padding">
+        <div class="col-md-12 text-muted text_with_line">Zmiana zdjęcia profilowego</div>
+        <div class="col-xs-12">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button class="btn btn-primary pull-right" type="submit">Zapisz</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

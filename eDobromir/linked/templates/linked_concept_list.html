@@ -1,0 +1,38 @@
+{% load tags_vote %}
+{% load profile_account_templatetags %}
+
+<div class="col-xs-12 text_with_line text-muted">Powiązane
+    <span class="pull-right text-muted">
+        <small>
+            <button type="button"
+                    class="btn-link linked_create_link link-tab"
+                    data-toggle="modal"
+                    data-target="#linked_create_modal">
+                Dodaj
+            </button>
+        </small>
+    </span>
+</div>
+<div class="col-xs-12">
+    {% for linked in linkedObject.links.all %}
+        <div class="media" id="{{ linked.slug }}">
+            <div class="media-left text-center vote_body">
+                {% autoescape off %}
+                {% render_vote_concept_linked linkedObject linked %}
+                {% endautoescape %}
+            </div>
+            <div class="media-body">
+                <img src="{{ linked.created_by.settings.avatar.avatar_image_comment.url }}" class="media-object" style="width:15px; float: left;">
+                <strong style="clear: left;">
+                    &nbsp; {% render_profile_username linked.created_by %}
+                </strong>
+                <sup class="text-muted">
+                    {{ linked.created }}
+                    <i class="fa fa-chevron-up" aria-hidden="true"></i> {{ linked.votes.count }}
+                </sup>
+                <br/>
+                <a href="{{ linked.link }}" class="link-tab">{{ linked.title }}</a><br/>
+            </div>
+        </div>
+    {% endfor %}
+</div>

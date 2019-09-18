@@ -1,0 +1,7 @@
+{% load tags_templatetags %}
+
+<div class="col-xs-12">
+    {% for tag in tags %}
+        {% render_tag_preview_less tag %}
+    {% endfor %}
+</div>

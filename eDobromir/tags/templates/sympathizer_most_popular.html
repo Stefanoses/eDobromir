@@ -1,0 +1,7 @@
+{% load tags_templatetags %}
+
+<div class="col-xs-12">
+    {% for sympathizer in sympathizers %}
+        {% render_sympathizer_preview_less sympathizer.name %}
+    {% endfor %}
+</div>

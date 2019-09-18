@@ -1,0 +1,9 @@
+{% extends 'tag_detail_base.html' %}
+{% load eureka_templatetags %}
+
+{% block tag_content_sidebar_left %}
+    {% for row in table.page.object_list|default:table.rows %}
+        {% render_eureka_preview_big row.record %}
+        <div class="col-xs-12 text_with_line"></div>
+    {% endfor %}
+{% endblock %}

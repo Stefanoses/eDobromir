@@ -1,0 +1,45 @@
+{% load tags_vote %}
+{% load profile_account_templatetags %}
+
+<div class="media anchor" id="{{ node.slug }}">
+    <div class="media-left text-center vote_body">
+        {% autoescape off %}
+        {% render_vote_eureka_comment commentObject node %}
+        {% endautoescape %}
+    </div>
+    <div class="media-body">
+        <img src="{{ node.created_by.settings.avatar.avatar_image_comment.url }}" class="media-object" style="width:15px; float: left;">
+        <strong style="clear: left;">
+            {% render_profile_username node.created_by %}
+        </strong>
+        <sup class="text-muted">
+            {{ node.created }}
+        </sup>
+        {% autoescape on %}
+            {{ node.content|safe }}
+        {% endautoescape %}
+        <small>
+            <button type="button"
+                    class="btn-link comment_reply_link link-tab"
+                    data-toggle="modal"
+                    data-target="#reply_modal"
+                    data-for="{{ node.slug }}"
+                    data-created_by="{{ node.created_by }}">
+                <i class="fa fa-reply" aria-hidden="true"></i>
+                Odpowiedz
+            </button>
+            <a href="{% url 'concept:concept_detail' commentObject.slug %}#{{ node.slug }}" class="link-tab">
+                <i class="fa fa-external-link" aria-hidden="true"></i> Link
+            </a>
+            <button type="button"
+                    class="btn-link comment_report_link link-tab"
+                    data-toggle="modal"
+                    data-target="#comment_report_modal"
+                    data-for="{{ node.slug }}"
+                    data-created_by="{{ node.created_by }}">
+                <i class="fa fa-flag-o" aria-hidden="true"></i>
+                Zgłoś
+            </button>
+        </small>
+    </div>
+</div>

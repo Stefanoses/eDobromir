@@ -1,0 +1,19 @@
+{% extends 'dashboard_sidebar_info.html' %}
+{% load static %}
+{% load imagekit %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+
+{% block title %}{{ eureka.title }}{% endblock %}
+
+{% block info_content_sidebar_top %}
+    <div class="col-xs-12">
+        <a href="{% url 'eureka:eureka_detail' eureka.slug %}" class="link-tab {% if active_page == 'eureka_detail' %}link-tab-active{% endif %}"><i class="fa fa-comments" aria-hidden="true"></i> Komentarze</a>
+        {% if eureka.eurekaInstruction.steps.count > 0 %}
+            <a href="{% url 'eureka:eureka_instruction_detail' eureka.slug %}" class="btn {% if active_page == 'eureka_detail' %}btn-default{% else %}btn-primary{% endif %}"><i class="fa fa-list-ol" aria-hidden="true"></i> Przejdź do instrukcji <span class="badge">{{ eureka.eurekaInstruction.steps.count }}</span></a>
+        {% endif %}
+        {% if eureka.link %}
+            <a href="{{ eureka.link }}" class="btn btn-default"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+        {% endif %}
+    </div>
+{% endblock %}

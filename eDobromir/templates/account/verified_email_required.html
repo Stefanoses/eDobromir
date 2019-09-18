@@ -1,0 +1,19 @@
+{% extends "dashboard_one_column_base.html" %}
+
+{% load i18n %}
+
+{% block title %}Potwierdź swój adres email{% endblock %}
+
+{% block content_column %}
+    <div class="col-xs-12 text-muted text_with_line">Potwierdź swój adres email</div>
+    <div class="col-xs-12">
+        {% url 'account_email' as email_url %}
+        <p>Ta część strony wymaga weryfikacji email.</p>
+        <p>
+            Wysłaliśmy email weryfikacyjny na twoją skrzynkę pocztową.
+            Podążaj za instrukcjami w nim zawartymi.
+            Jeśli z jakiś powodów email nie dotar w ciągu kilku minut, skontaktuj się z nami.
+        </p>
+        <strong>Pamiętaj że ciągle możesz zmienić swój adres email w swoich ustawieniach!</strong>
+    </div>
+{% endblock %}

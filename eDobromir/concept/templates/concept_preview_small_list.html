@@ -1,0 +1,7 @@
+{% load tags_concept %}
+{% load tags_vote %}
+{% load comments_templatetags %}
+
+{% for concept in list %}
+    {% render_concept_preview_small concept %}
+{% endfor %}

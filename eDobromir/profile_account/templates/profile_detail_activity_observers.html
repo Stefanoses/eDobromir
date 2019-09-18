@@ -1,0 +1,18 @@
+{% extends 'profile_detail_activity.html' %}
+{% load profile_account_templatetags %}
+{% load comments_templatetags %}
+{% load bootstrap3 %}
+
+{% block profile_detail_activity %}
+    <div class="col-xs-12 text-muted text_with_line">
+        <a href="{% url 'account_profile_activity_followers' object.username %}" class="link-tab {% if active_tab == 'followers' %}link-tab-active{% endif %}">Obserwujący </a><sup>{{ followers_count }}</sup>
+        <a href="{% url 'account_profile_activity_observers' object.username %}" class="link-tab {% if active_tab == 'observers' %}link-tab-active{% endif %}">Obserwuje </a><sup>{{ observers_count }}</sup>
+    </div>
+    {% for row in table.page.object_list|default:table.rows %}
+        {% render_profile_preview row.record %}
+        <div class="col-xs-12 text_with_line"></div>
+    {% endfor %}
+    <div class="col-xs-12">
+        {% bootstrap_pagination table.page url=request.get_full_path %}
+    </div>
+{% endblock %}

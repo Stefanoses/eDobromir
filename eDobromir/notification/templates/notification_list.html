@@ -1,0 +1,51 @@
+{% extends 'dashboard_sidebar_base.html' %}
+{% load django_tables2 %}
+{% load bootstrap3 %}
+
+{% block content_sidebar_top %}
+{% endblock %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Powiadomienia</div>
+    <div class="col-xs-12">
+        <table class="table table-compact table-striped"{% if table.attrs %} {{ table.attrs.as_html }}{% endif %}>
+            <thead>
+            <tr>
+                {% for column in table.columns %}
+                    {% if column.orderable %}
+                        <th><a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}" class="link-tab">{{ column.header }}</a></th>
+                    {% else %}
+                        <th {{ column.attrs.th.as_html }}>{{ column.header }}</th>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in table.page.object_list|default:table.rows %} {# support pagination #}
+                <tr class="{% cycle "odd" "even" %}">
+                    {% for column, cell in row.items %}
+                        <td {{ column.attrs.td.as_html }}>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% empty %}
+                {% if table.empty_text %}
+                    <tr><td colspan="{{ table.columns|length }}">{{ table.empty_text }}</td></tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% bootstrap_pagination table.page url=request.get_full_path %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Wyszukiwanie</div>
+    <div class="col-xs-12">
+        <form action="" method="get">
+            {% bootstrap_form filter.form %}
+            <button type="submit" class="btn btn-default pull-right">Szukaj</button>
+        </form>
+    </div>
+{% endblock %}
+

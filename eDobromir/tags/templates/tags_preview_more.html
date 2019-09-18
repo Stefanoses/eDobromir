@@ -1,0 +1,11 @@
+{% load notification_templatetags %}
+
+{% if tag %}
+    <span style="white-space:nowrap;">
+        <a href="{% url 'search:search_mixed_everywhere' %}?sort=-published&when=eternity&search_input=%23{{ tag.name }}" class="link-tab"><i>#</i>{{ tag.name }}</a>
+        <sup>{% render_notification_followers_tag tag %}</sup>
+    </span>
+{% else %}
+    Tag #{{ tag_name }} nie istnieje
+{% endif %}
+

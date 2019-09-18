@@ -1,0 +1,32 @@
+{% load bootstrap3 %}
+
+<div style="position: fixed; bottom: 10px; right: 10px;">
+    <div class="btn-group" role="group">
+        <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#error_report_modal" ><small>Zgłoś błąd</small></button>
+        <a href="{% url 'content:content_error_list' %}" class="btn btn-md btn-default"><small><i class="fa fa-th-list" aria-hidden="true"></i></small></a>
+    </div>
+
+
+</div>
+
+<div class="modal" id="error_report_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="alert alert-danger">
+                    <strong>Zgłoś błąd związany ze stroną.</strong>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'content:content_error_create' %}" method="post" enctype="multipart/form-data" id="error_report_form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                <button type="submit" class="btn btn-primary" form="error_report_form">Zgłoś</button>
+            </div>
+        </div>
+    </div>
+</div>

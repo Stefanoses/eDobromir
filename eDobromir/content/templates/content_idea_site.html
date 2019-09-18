@@ -1,0 +1,39 @@
+{% extends 'dashboard_sidebar_base.html' %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Idea strony</div>
+    <div class="col-xs-12" id="idea_step">
+        <p>
+            eDobromir to miejsce dla entuzjastów w każdym tego słowa znaczeniu.
+            Nie ważne czy jesteś programistą czy też ogrodnikiem, na pewno twoja wiedza przyda się innym.
+        </p>
+        <p>
+            Możesz podzielić się swoim doświadczeniem w postaci publikacji ciekawych atykułów czy też filmów jako poradnik do eureki czy też dyskusji w koncepcji.
+        </p>
+        <p>
+            Treści segregowane są względem tagów by można było w łatwy sposób odnaleźć poradniki które nas interesują. Istnieją również grupy sympatyków którzy są entuzjastami w wąskiej dziedzinie. Ich właścicielami są użytkownicy decydujący o zasadach działania danej grupy.
+        </p>
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Menu</div>
+    <div class="col-xs-12">
+        <ul id="nav" class="instruction_nav nav hidden-xs hidden-sm" data-spy="affix">
+            <li><a href="#idea_step">Idea strony</a></li>
+        </ul>
+        <div id="affix-stop" style="height:10px;"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav').affix({
+            offset: {
+              top: $('#nav').offset().top,
+              bottom: ($('#footer').outerHeight(true)) + 40,
+            }
+        });
+        $("#instruction_content").css("height", $('#instruction_content').outerHeight(true));
+    </script>
+{% endblock %}

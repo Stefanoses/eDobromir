@@ -1,0 +1,11 @@
+{% load fontawesome %}
+{% load notification_templatetags %}
+
+{% if sympathizer %}
+    <span style="white-space:nowrap;">
+        <a href="{% url 'search:search_mixed_everywhere' %}?sort=-published&when=eternity&search_input=%21{{ sympathizer.name }}" class="link-tab"><i>{% fontawesome_icon sympathizer.icon %}</i>{{ sympathizer.name }}</a>
+        <sup>{% render_notification_followers_sympathizer sympathizer %}</sup>
+    </span>
+{% else %}
+    Sympatycy !{{ sympathizer_name }} nie istnieją
+{% endif %}

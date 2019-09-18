@@ -1,0 +1,21 @@
+{% extends 'conversation_base.html' %}
+{% load bootstrap3 %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Nowa konwersacja</div>
+    <div class="col-xs-12">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button class="btn btn-primary pull-right">Napisz wiadomość</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('select').select2({
+            width: "100%"
+        });
+    </script>
+{% endblock %}

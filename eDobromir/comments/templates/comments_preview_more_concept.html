@@ -1,0 +1,42 @@
+{% load profile_account_templatetags %}
+{% load moderation_templatetags %}
+
+<img src="{{ node.created_by.settings.avatar.avatar_image_comment.url }}" class="media-object" style="width:15px; float: left;">
+<strong style="clear: left;">
+    &nbsp; {% render_profile_username node.created_by %}
+</strong>
+<sup class="text-muted">
+    {{ node.created }}
+    <i class="fa fa-chevron-up" aria-hidden="true"></i> {{ node.votes.count }}
+</sup>
+<div class="comment-body">
+    {% if not node.mask.is_delete %}
+        {% autoescape on %}
+            {{ node.content|safe }}
+        {% endautoescape %}
+    {% else %}
+        <span class="text-muted">Komentarz został usunięty</span>
+    {% endif %}
+</div>
+<small>
+    {% if not node.mask.is_delete %}
+        <button type="button"
+                class="btn-link comment_reply_link link-tab"
+                data-toggle="modal"
+                data-target="#reply_modal"
+                data-for="{{ node.slug }}"
+                data-created_by="{{ node.created_by }}">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Odpowiedz
+        </button>
+        <a href="{% url 'concept:concept_detail' comment_object.slug %}#{{ node.slug }}" class="link-tab">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Link
+        </a>
+        {% render_moderation_report_concept_comment_create comment_object node %}
+        {% if request.user == node.created_by %}
+            <a href="{% url 'comments:comment_concept_delete' comment_object.slug node.slug %}" class="link-tab">
+                <i class="fa fa-trash-o" aria-hidden="true"></i> Usuń
+            </a>
+        {% endif %}
+    {% endif %}
+</small>

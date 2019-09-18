@@ -1,0 +1,18 @@
+{% extends 'eureka_instruction_step_base.html' %}
+
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+
+{% block step_content_sidebar_left %}
+
+    <div class="col-md-12 text-muted text_with_line">Usuń krok</div>
+    <div class="col-xs-12">
+        <form action="" method="post">
+            {% csrf_token %}
+            Czy na pewno chcesz usunąć krok: <strong>{{ object.title }}</strong>? Ten proces jest nieodwracalny.
+            <button type="submit" class="btn btn-danger pull-right">Usuń</button>
+        </form>
+    </div>
+
+{% endblock %}

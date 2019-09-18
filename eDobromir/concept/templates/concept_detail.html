@@ -1,0 +1,39 @@
+{% extends 'concept_base.html' %}
+{% load tags_concept %}
+{% load static %}
+{% load imagekit %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+{% load tags_linked %}
+{% load diary_templatetags %}
+{% load moderation_templatetags %}
+{% load tags_vote %}
+
+{% block info_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Koncepcja</div>
+    {% render_concept_preview_big object %}
+
+    <div class="col-xs-12 text-muted">Komentarze</div>
+    <div class="col-xs-12">
+        {% render_comments_tree_concept object %}
+    </div>
+    <div class="col-xs-12 text-muted text_with_line">Napisz komentarz</div>
+    <div class="col-xs-12">
+        {% render_comments_create %}
+    </div>
+    {% render_comments_reply %}
+{% endblock %}
+
+{% block info_content_sidebar_right %}
+    <div class="col-xs-12 text_with_line text-muted">Informacje</div>
+    <div class="col-xs-12">
+        {% render_diary_detail concept %}
+        {% render_vote_detail concept %}
+        {% render_moderation_report_detail concept %}
+    </div>
+
+    <div class="col-xs-12 text_with_line text-muted">Podobne</div>
+    {% render_similar_concept concept 3 %}
+    {% render_linked_concept_list object %}
+    {% render_linked_concept_create object %}
+{% endblock %}

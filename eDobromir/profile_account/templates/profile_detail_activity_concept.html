@@ -1,0 +1,21 @@
+{% extends 'profile_detail_activity.html' %}
+{% load tags_concept %}
+{% load bootstrap3 %}
+
+{% block profile_detail_activity %}
+    <div class="col-xs-12 text-muted text_with_line">
+        <a href="{% url 'account_profile_activity_concept' object.username %}" class="link-tab {% if active_tab == 'concept' %}link-tab-active{% endif %}">Główna </a><sup>{{ concept_count }}</sup>
+        <a href="{% url 'account_profile_activity_concept_vote' object.username %}" class="link-tab {% if active_tab == 'vote' %}link-tab-active{% endif %}">Ocenione </a><sup>{{ concept_vote_count }}</sup>
+        {% if user == object %}
+            <a href="{% url 'account_profile_activity_concept_favorite' object.username %}" class="link-tab {% if active_tab == 'favorite' %}link-tab-active{% endif %}">Ulubione </a><sup>{{ concept_favorite_count }}</sup>
+        {% endif %}
+    </div>
+
+    {% for row in table.page.object_list|default:table.rows %}
+        {% render_concept_preview_big row.record %}
+        <div class="col-xs-12 text_with_line"></div>
+    {% endfor %}
+    <div class="col-xs-12">
+        {% bootstrap_pagination table.page url=request.get_full_path %}
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'dashboard_sidebar_base.html' %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line" id="step_0">Polityka prywatności</div>
+    <div class="col-xs-12">
+        Serwis eDobromir.pl szanuje prywatność swoich użytkowników.
+        Poniżesz informacje są bardzo ważne aby lepiej zrozumieć politykę prywatności na naszej stronie.
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line" id="step_1">Prawa autorskie</div>
+    <div class="col-xs-12">
+        Użytkownicy są wstanie dodawać przekierowania (linki) do innych stron wraz z ich opisem.
+        Należy pamiętać iż wszelkie treści są objęte prawem autorskim i podlegają ochronie zgodnie z prawem autorskim.
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line" id="step_2">Wyłączenie odpowiedzialności</div>
+    <div class="col-xs-12">
+        Serwis eDobromir.pl nie ponosi odpowiedzialności za treści i opinie wyrażane przez użytkowników w komentarzach lub opisach czy też dodawanych treściach.
+        Są one wyłącznie własnością użytkowników, od których pochodzą.
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line" id="step_3">Gromadzenie danych osobowych</div>
+    <div class="col-xs-12">
+        Podczas rejestracji w serwisie eDobromir.pl wymagamy podania co najmniej adresu email.
+        Nasz serwis przetwarza dane osobowe użytkowników zgodnie z obowiązującymi przepisami.
+        Adresów email używamy, w szczególności, w celu powiadamiania użytkowników o istotnych zmianach w serwisie lub komunikatach technicznych.
+        Podanie pozostałych danych takich jak imię, nazwisko, miejsce zamieszkania, numerów GG, Skype czy też facebook nie jest obowiązkowe.
+        Tylko od Ciebie zależy, czy udostępnisz je innym użytkownikom.
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line" id="step_4">Informacje logowania</div>
+    <div class="col-xs-12">
+        Podczas korzystania z serwisu eDobromir.pl nasze serwery automatycznie rejestrują informacje przesyłane przez przeglądarkę użytkownika w trakcie wyświetlania witryny.
+        Dzienniki serwera mogą zawierać takie informacje jak: żądanie sieciowe, adres IP, typ przeglądarki, język przeglądarki, data i godzina przesłania żądania oraz pliki cookies.
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Menu</div>
+    <div class="col-xs-12">
+        <ul id="nav" class="instruction_nav nav hidden-xs hidden-sm" data-spy="affix">
+            <li><a href="#step_0">Polityka prywatności</a></li>
+            <li><a href="#step_1">Prawa autorskie</a></li>
+            <li><a href="#step_2">Wyłączenie odpowiedzialności</a></li>
+            <li><a href="#step_3">Gromadzenie danych osobowych</a></li>
+            <li><a href="#step_4">Informacje logowania</a></li>
+        </ul>
+        <div id="affix-stop" style="height:10px;"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav').affix({
+            offset: {
+              top: $('#nav').offset().top,
+              bottom: ($('#footer').outerHeight(true)) + 40,
+            }
+        });
+        $("#instruction_content").css("height", $('#instruction_content').outerHeight(true));
+    </script>
+{% endblock %}

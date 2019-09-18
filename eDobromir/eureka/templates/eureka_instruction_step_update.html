@@ -1,0 +1,21 @@
+{% extends 'eureka_instruction_step_base.html' %}
+
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+
+{% block step_content_sidebar_left %}
+    <div class="col-md-12 text-muted text_with_line">Aktualizuj krok</div>
+    <div class="col-xs-12">
+        <form action="" method="post" id="step_update">
+            {% csrf_token %}
+            {% bootstrap_field form.title %}
+            {% bootstrap_field form.content %}
+        </form>
+
+        <div class="btn-group pull-right">
+            <a href="{% url 'eureka:eureka_instruction_step_delete' slug=eureka.slug step_slug=object.step_slug %}" class="btn btn-danger">Usuń</a>
+            <button type="submit" class="btn btn-primary" form="step_update">Aktualizuj</button>
+        </div>
+    </div>
+{% endblock %}

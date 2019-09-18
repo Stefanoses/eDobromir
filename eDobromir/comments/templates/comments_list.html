@@ -1,0 +1,16 @@
+{% load tags_vote %}
+{% load profile_account_templatetags %}
+{% load comments_templatetags %}
+
+{% for node in comments_list %}
+    <div class="media" id="{{ node.slug }}">
+        <div class="media-left text-center vote_body">
+            {% autoescape off %}
+            {% render_vote_concept_comment comment_object node %}
+            {% endautoescape %}
+        </div>
+        <div class="media-body">
+            {% render_comments_preview_less comment_object node %}
+        </div>
+    </div>
+{% endfor %}

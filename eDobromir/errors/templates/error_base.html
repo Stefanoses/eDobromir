@@ -1,0 +1,12 @@
+{% extends 'dashboard_one_column_base.html' %}
+
+{% block title %}Error{% endblock %}
+
+{% block content_column %}
+    <div class="col-xs-12">
+        <div class="alert alert-danger">
+            {% block error_content_column %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

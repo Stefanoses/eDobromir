@@ -1,0 +1,10 @@
+<span class="observe_body observe_tag_{{ object.slug }}">
+    <a href="{% url 'notification:notification_follow_tag' object %}" class="link-tab {% if was_observer %}link-tab-active{% endif %} ajax_link" data-id="observe_tag_{{ object.slug }}">
+        {% if was_observer %}
+            <i class="fa fa-bell" aria-hidden="true"></i>
+        {% else %}
+            <i class="fa fa-bell-o" aria-hidden="true"></i>
+        {% endif %}
+        {{ observers_count }}
+    </a>
+</span>

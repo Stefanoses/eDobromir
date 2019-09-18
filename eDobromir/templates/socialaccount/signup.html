@@ -1,0 +1,30 @@
+{% extends "dashboard_one_column_base.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block content_column %}
+    <div class="col-xs-12 text-muted text_with_line">Rejestracja</div>
+    <div class="col-xs-12">
+        {% with provider_name=account.get_provider.name site_name=site.name %}
+            Chcesz użyć konta {{ provider_name }} do zalogowania się na naszej stronie.
+            Aby dokończyć rejestrację proszę wypełnić formularz.
+        {% endwith %}
+
+        <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary pull-right">
+                    Rejestruj
+                </button>
+            {% endbuttons %}
+
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

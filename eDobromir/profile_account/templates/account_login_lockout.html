@@ -1,0 +1,21 @@
+{% extends 'dashboard_sidebar_base.html' %}
+
+{% load account %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+
+{% block title %}Logowanie i rejestracja{% endblock %}
+
+{% block content_sidebar_left %}
+    <div class="col-md-12 text-muted text_with_line">Logowanie jest niemożliwe</div>
+    <div class="col-md-12">
+       <div class="alert alert-danger">Zbyt wiele nieudanych prób logowania. Ponowne logowanie możliwe za {{ cooloff_time }}</div>
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-md-12 text-muted text_with_line">Rejestracja</div>
+    <div class="col-xs-12">
+        Nie masz jeszcze u nas konta? <a href="{% url 'account_signup' %}">Zarejstruj się</a>.
+    </div>
+{% endblock %}

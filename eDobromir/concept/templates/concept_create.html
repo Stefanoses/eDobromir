@@ -1,0 +1,43 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+
+{% block title %}Dodaj koncepcję{% endblock %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Dodawanie koncepcji</div>
+    <div class="col-xs-12">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_field form.content set_required=True show_help=False %}
+            {% bootstrap_field form.sympathizers set_required=False show_help=False %}
+            {% bootstrap_field form.tags set_required=False show_help=False show_label=False %}
+            <button class="btn btn-primary pull-right" type="submit">Opublikuj</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#id_tags').tagsinput({
+            confirmKeys: [32],
+            maxTags: 5,
+            maxChars: 15,
+            trimValue: true
+        });
+    </script>
+    <script type="text/javascript">
+        function format(icon) {
+            var originalOption = icon.element;
+            var $selection = $("<span><i class='fa fa-" + $(originalOption).data('icon') + "'></i> " + icon.text + "</span>");
+            return $selection;
+        }
+        $('select').select2({
+            width: "100%",
+            allowClear: true,
+            templateSelection: format,
+            templateResult: format
+        });
+    </script>
+{% endblock %}

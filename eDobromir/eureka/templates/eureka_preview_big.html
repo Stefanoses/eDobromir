@@ -1,0 +1,74 @@
+{% load tags_vote %}
+{% load tags_templatetags %}
+{% load moderation_templatetags %}
+{% load profile_account_templatetags %}
+{% load notification_templatetags %}
+{% load favorites_templatetags %}
+
+<div class="col-xs-12">
+    <div class="clearfix row-no-padding">
+        <div class="col-sm-1 col-xs-2 text-center">
+            <div style="padding-right: 10px;" class="vote_body">
+                {% autoescape off %}
+                {% render_vote_eureka eureka %}
+                {% endautoescape %}
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-10">
+            <a href="{% url 'eureka:eureka_detail' eureka.slug %}" class="link-remove-format link-tab"><img src="{{ eureka.preview_image_thumbnail.url }}" class="img-responsive"></a>
+        </div>
+        <div class="col-sm-8 col-xs-10">
+            <div style="padding-left: 10px;">
+                <strong style="font-size: 18px;"><a href="{% url 'eureka:eureka_detail' eureka.slug %}" class="link-remove-format">{{ eureka.title }}</a></strong>
+                <p>
+                    <small class="text-muted">
+                        @{% render_profile_username eureka.created_by %}
+                        {% if eureka.sympathizers %}
+                            {% render_sympathizer_preview_less eureka.sympathizers.name %}
+                        {% endif %}
+                        {% for tag in eureka.tags.all %}
+                            {% render_tag_preview_less tag %}
+                        {% endfor %}
+                        <i class="fa fa-comments" aria-hidden="true"></i> {{ eureka.comments.count }}
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        {% if eureka.published %}
+                            {{ eureka.published|date }}
+                        {% else %}
+                            Nie opublikowano
+                        {% endif %}
+                    </small>
+                </p>
+                <p>{{ eureka.description }}</p>
+                <p>
+                    <small class="text-muted">
+                        {% render_notification_followers eureka.created_by %}
+                        {% render_favorites_manager_eureka eureka %}
+                        {% render_moderation_report_eureka_create eureka %}
+
+                        {% if eureka.created_by == request.user %}
+                            <a href="{% url 'eureka:eureka_delete' eureka.slug %}" class="link-tab"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</a>
+                            <a href="{% url 'eureka:eureka_summary' eureka.slug %}" class="link-tab"><i class="fa fa-list-alt" aria-hidden="true"></i> Zarządzaj</a>
+                        {% endif %}
+
+                        <span class="pull-right">
+                            {% if eureka.price %}
+                                <span class="label label-primary">{{ eureka.price }} zł</span>
+                            {% endif %}
+                            {% if eureka.difficult %}
+                                {% if eureka.difficult == 'easy' %}
+                                    <span class="label label-success">Łatwy</span>
+                                {% else %}
+                                    {% if eureka.difficult == 'medium' %}
+                                        <span class="label label-warning">Średni</span>
+                                    {% else %}
+                                        <span class="label label-danger">Trudny</span>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

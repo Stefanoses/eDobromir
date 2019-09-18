@@ -1,0 +1,16 @@
+{% extends 'vote_eureka_base.html' %}
+
+{% block vote_area_id %}vote_eureka_linked_{{ object.slug }}{% endblock %}
+
+{% block vote_up_url %}{% url 'votes:vote_up_eureka_linked' eureka.slug object.slug %}{% endblock %}
+
+{% block vote_down_url %}{% url 'votes:vote_down_eureka_linked' eureka.slug object.slug %}{% endblock %}
+
+{% block vote_up_link_id %}vote_eureka_linked_{{ object.slug }}{% endblock %}
+
+{% block vote_down_link_id %}vote_eureka_linked_{{ object.slug }}{% endblock %}
+
+{% block vote_count %}{% endblock %}
+
+{% block vote_down %}
+{% endblock %}

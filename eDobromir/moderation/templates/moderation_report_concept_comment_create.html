@@ -1,0 +1,3 @@
+{% extends 'moderation_report_comment_create.html' %}
+
+{% block form_url %}{% url 'moderation:moderation_report_concept_comment' concept.slug reportObject.slug %}{% endblock %}

@@ -1,0 +1,7 @@
+{% load i18n %}
+{% load account %}
+
+{% user_display user as user_display %}
+<div class="alert alert-warning">
+  <strong>Uwaga</strong> Jesteś aktualnie zalogowany jako {{ user_display }}.
+</div>

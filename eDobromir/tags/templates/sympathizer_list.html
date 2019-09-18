@@ -1,0 +1,9 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load tags_templatetags %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Tagi sympatyków</div>
+    {% for sympathizer in sympathizers %}
+        {% render_sympathizer_preview_less sympathizer.slug %}
+    {% endfor %}
+{% endblock %}

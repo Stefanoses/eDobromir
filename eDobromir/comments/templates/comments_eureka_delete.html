@@ -1,0 +1,19 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+{% load tags_concept %}
+{% load comments_templatetags %}
+
+{% block title %}Usuń komentarz do eureki{% endblock %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-md-12 text-muted text_with_line">Usuwanie komentarza do eureki</div>
+    <div class="col-xs-12">
+        {% render_comments_preview_more_eureka comment_object node %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger pull-right" type="submit">Usuń komentarz</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'profile_detail_activity.html' %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+{% load bootstrap3 %}
+
+{% block profile_detail_activity %}
+    <div class="col-xs-12 text-muted text_with_line">
+        <a href="{% url 'account_profile_activity_eureka' object.username %}" class="link-tab {% if active_tab == 'main' %}link-tab-active{% endif %}">Główna </a><sup>{{ eureka_count }}</sup>
+        <a href="{% url 'account_profile_activity_eureka_waiting' object.username %}" class="link-tab {% if active_tab == 'waiting' %}link-tab-active{% endif %}">Poczekalnia </a><sup>{{ eureka_waiting_count }}</sup>
+        <a href="{% url 'account_profile_activity_eureka_vote' object.username %}" class="link-tab {% if active_tab == 'vote' %}link-tab-active{% endif %}">Ocenione </a><sup>{{ eureka_vote_count }}</sup>
+        {% if user == object %}
+            <a href="{% url 'account_profile_activity_eureka_favorite' object.username %}" class="link-tab {% if active_tab == 'favorite' %}link-tab-active{% endif %}">Ulubione </a><sup>{{ eureka_favorite_count }}</sup>
+            <a href="{% url 'account_profile_activity_eureka_sketch' object.username %}" class="link-tab {% if active_tab == 'sketch' %}link-tab-active{% endif %}">Szkice </a><sup>{{ eureka_sketch_count }}</sup>
+        {% endif %}
+    </div>
+
+    {% for row in table.page.object_list|default:table.rows %}
+        {% render_eureka_preview_big row.record %}
+        <div class="col-xs-12 text_with_line"></div>
+    {% endfor %}
+    <div class="col-xs-12">
+        {% bootstrap_pagination table.page url=request.get_full_path %}
+    </div>
+{% endblock %}

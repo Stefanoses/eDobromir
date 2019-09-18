@@ -1,0 +1,60 @@
+{% extends 'dashboard_sidebar_base.html' %}
+
+{% load static %}
+{% load account %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+{% load profile_account_templatetags %}
+{% load notification_templatetags %}
+{% load tags_templatetags %}
+
+{% block title %}Użytkownik {{ user_profile }}{% endblock %}
+
+{% block content_sidebar_left %}
+    {% block profile_content_sidebar_left %}
+    {% endblock %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">
+        {% render_profile_username user_profile %}
+        <span class="pull-right">
+            <small>{% render_notification_followers user_profile %}</small>
+        </span>
+    </div>
+    <div class="col-xs-12">
+        <a href="{% url 'account_profile_detail' user_profile %}" class="link-remove-format">
+            <img src="{{ user_profile.settings.avatar.avatar_image_profile.url }}" class="img-responsive">
+        </a>
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line">Osiągnięcia</div>
+    <div class="col-xs-12">
+        <strong>
+            <i class="fa fa-trophy" aria-hidden="true"></i> {{ user_profile.rank.rank_pos }}
+            <span style="color: #C7254E"><i class="fa fa-star-half-o" aria-hidden="true"></i> {{ user_profile.rank.points }}</span>
+            <br/>
+        </strong>
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line">Właściciel sympatyków</div>
+    <div class="col-xs-12">
+        {% for sympathizer in owner_sympathizers %}
+            {% render_sympathizer_preview_more sympathizer.slug %}
+        {% endfor %}
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line">Obserwowani sympatycy</div>
+    <div class="col-xs-12">
+        {% for sympathizer in observer_sympathizers %}
+            {% render_sympathizer_preview_more sympathizer.slug %}
+        {% endfor %}
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line">Obserwowane tagi</div>
+    <div class="col-xs-12">
+        {% for tag in observer_tags %}
+            {% render_tag_preview_more tag.slug %}
+        {% endfor %}
+    </div>
+{% endblock %}

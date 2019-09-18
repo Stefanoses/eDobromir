@@ -1,0 +1,25 @@
+{% load mptt_tags %}
+{% load comments_templatetags %}
+{% load tags_concept %}
+{% load tags_vote %}
+{% load moderation_templatetags %}
+{% load profile_account_templatetags %}
+
+{% with nodes=comment_object.comments.all %}
+    {% recursetree nodes %}
+        <div class="horizontal_line"></div>
+        <div class="media" id="{{ node.slug }}">
+            <div class="media-left text-center vote_body">
+                {% autoescape off %}
+                {% render_vote_concept_comment comment_object node %}
+                {% endautoescape %}
+            </div>
+            <div class="media-body">
+                {% render_comments_preview_more_concept comment_object node %}
+                {% if not node.is_leaf_node %}
+                    {{ children }}
+                {% endif %}
+            </div>
+        </div>
+    {% endrecursetree %}
+{% endwith %}

@@ -1,0 +1,38 @@
+{% extends 'profile_base.html' %}
+
+{% load static %}
+{% load account %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+
+{% block title %}{{ user }}{% endblock %}
+
+{% block content_sidebar_top %}
+    <div class="col-xs-12">
+        <a href="{% url 'account_settings_profile' %}" class="link-remove-format link-tab {% if active_page == 'settings_profile' %}link-tab-active{% endif %}">
+            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+            Profil
+        </a>
+        <a href="{% url 'account_change_password' %}" class="link-remove-format link-tab {% if active_page == 'settings_password' %}link-tab-active{% endif %}">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            Hasło
+        </a>
+        <a href="{% url 'account_email' %}" class="link-remove-format link-tab {% if active_page == 'settings_email' %}link-tab-active{% endif %}">
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            E-mail
+        </a>
+        <a href="{% url 'account_settings_avatar' %}" class="link-remove-format link-tab {% if active_page == 'settings_avatar' %}link-tab-active{% endif %}">
+           <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            Avatar
+        </a>
+        <a href="{% url 'socialaccount_connections' %}" class="link-remove-format link-tab {% if active_page == 'settings_social' %}link-tab-active{% endif %}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Konta społecznościowe
+        </a>
+    </div>
+{% endblock %}
+
+{% block profile_content_sidebar_left %}
+    {% block settings_content_sidebar_left %}
+    {% endblock %}
+{% endblock %}

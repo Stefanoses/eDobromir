@@ -1,0 +1,10 @@
+{% load fontawesome %}
+
+{% if sympathizer %}
+    <span style="white-space:nowrap;">
+        <a href="{% url 'search:search_mixed_everywhere' %}?sort=-published&when=eternity&search_input=%21{{ sympathizer.name }}" class="link-tab"><i>{% fontawesome_icon sympathizer.icon %}</i>{{ sympathizer.name }}</a>
+    </span>
+{% else %}
+    Sympatycy !{{ sympathizer_name }} nie istnieją
+{% endif %}
+

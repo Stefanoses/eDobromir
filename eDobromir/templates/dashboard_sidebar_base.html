@@ -1,0 +1,27 @@
+{% extends 'dashboard_one_column_base.html' %}
+
+{% block content_column %}
+    <div class="col-sm-12">
+        <div class="clearfix row-no-padding">
+            {% block content_sidebar_top %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="clearfix row-no-padding" style="padding-right: 10px;">
+            {% block content_sidebar_left %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="clearfix row-no-padding" style="padding-left: 10px;">
+            {% block content_sidebar_right %}
+            {% endblock %}
+        </div>
+    </div>
+    {% block content_sidebar_bottom %}
+    {% endblock %}
+{% endblock %}
+
+
+

@@ -1,0 +1,9 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load tags_templatetags %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Tagi</div>
+    {% for tag in tags %}
+        {% render_tag_preview_less tag.slug %}
+    {% endfor %}
+{% endblock %}

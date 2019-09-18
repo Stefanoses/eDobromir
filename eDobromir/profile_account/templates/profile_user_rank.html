@@ -1,0 +1,45 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load static %}
+{% load tags_concept %}
+{% load eureka_templatetags %}
+{% load render_table from django_tables2 %}
+{% load querystring from django_tables2 %}
+{% load trans blocktrans from i18n %}
+{% load bootstrap3 %}
+{% load tags_templatetags %}
+{% load profile_account_templatetags %}
+
+{% block title %}Ranking użytkowników{% endblock %}
+
+{% block recent_content_sidebar_top %}
+    <div class="col-xs-12">
+        <a href="?sort=-position" class="link-tab {% if table.order_by|safe == '-position' %}link-tab-active{% endif %}">
+            <i class="fa fa-trophy" aria-hidden="true"></i> Pozycja
+        </a>
+        <a href="?sort=-username" class="link-tab {% if table.order_by|safe == '-username' %}link-tab-active{% endif %}">
+            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i> Nazwa
+        </a>
+        <a href="?sort=-date_joined" class="link-tab {% if table.order_by|safe == '-date_joined' %}link-tab-active{% endif %}">
+            <i class="fa fa-calendar" aria-hidden="true"></i> Data
+        </a>
+    </div>
+{% endblock %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Ranking</div>
+    {% for row in table.page.object_list|default:table.rows %}
+        {% render_profile_preview row.record %}
+        <div class="col-xs-12 text_with_line"></div>
+    {% endfor %}
+    <div class="col-xs-12">
+        {% bootstrap_pagination table.page url=request.get_full_path %}
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right_extended %}
+    <div class="col-xs-12 text_with_line text-muted">Koncepcje</div>
+    {% render_concept_preview_small_random_list 3 %}
+
+    <div class="col-xs-12 text_with_line text-muted">Główna</div>
+    {% render_eureka_random_list 3 %}
+{% endblock %}

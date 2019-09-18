@@ -1,0 +1,18 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+{% load eureka_templatetags %}
+
+{% block title %}Usuń eurekę{% endblock %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-md-12 text-muted text_with_line">Usuwanie eureki</div>
+    <div class="col-xs-12">
+        {% render_eureka_preview_big object %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger pull-right" type="submit">Usuń eurekę</button>
+        </form>
+    </div>
+{% endblock %}

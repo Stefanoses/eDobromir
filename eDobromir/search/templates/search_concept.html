@@ -1,0 +1,43 @@
+{% extends 'search_base.html' %}
+{% load static %}
+{% load tags_concept %}
+{% load render_table from django_tables2 %}
+{% load querystring from django_tables2 %}
+{% load trans blocktrans from i18n %}
+{% load bootstrap3 %}
+{% load comments_templatetags %}
+{% load eureka_templatetags %}
+
+{% block search_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Koncepcje</div>
+    {% for row in table.page.object_list|default:table.rows %}
+        {% render_concept_preview_medium_extended row.record %}
+        <div class="col-xs-12 text_with_line"></div>
+    {% endfor %}
+    {% render_comments_reply %}
+    <div class="col-xs-12">
+        {% bootstrap_pagination table.page url=request.get_full_path %}
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right_extended %}
+    <div class="col-xs-12 text_with_line text-muted">
+        Poczekalnia
+        <span class="pull-right">
+            <small>
+                <a href="{% url 'search:search_eureka_waiting' %}" class="link-tab"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+            </small>
+        </span>
+    </div>
+    {% render_eureka_waiting_random_list 3 %}
+
+    <div class="col-xs-12 text_with_line text-muted">
+        Główna
+        <span class="pull-right">
+            <small>
+                <a href="{% url 'search:search_eureka' %}" class="link-tab"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+            </small>
+        </span>
+    </div>
+    {% render_eureka_random_list 3 %}
+{% endblock %}

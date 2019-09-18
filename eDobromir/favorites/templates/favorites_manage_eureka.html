@@ -1,0 +1,10 @@
+<span class="favorites_body favorites_{{ favorite_content.slug }}">
+    <a href="{% url 'favorites:favorites_eureka' favorite_content.slug %}" class="link-tab {% if was_favorite %}link-tab-active{% endif %} ajax_link" data-id="favorites_{{ favorite_content.slug }}">
+        {% if was_favorite %}
+            <i class="fa fa-heart" aria-hidden="true"></i>
+        {% else %}
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+        {% endif %}
+        Ulubione
+    </a>
+</span>

@@ -1,0 +1,5 @@
+{% load profile_account_templatetags %}
+
+{% for profile in profiles %}
+    {% render_profile_preview profile %}
+{% endfor %}

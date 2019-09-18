@@ -1,0 +1,51 @@
+{% extends 'search_mixed.html' %}
+{% load static %}
+{% load tags_concept %}
+{% load eureka_templatetags %}
+{% load render_table from django_tables2 %}
+{% load querystring from django_tables2 %}
+{% load trans blocktrans from i18n %}
+{% load bootstrap3 %}
+{% load tags_concept %}
+
+{% block find_content %}
+    <div class="col-xs-12 text-muted text_with_line">Główna <sup>{{ table_eureka.data|length }}</sup></div>
+    {% for row in table_eureka.page.object_list|default:table_eureka.rows %}
+        {% render_eureka_preview_big row.record %}
+        {% if not forloop.last %}
+            <div class="col-xs-12 text_with_line"></div>
+        {% endif %}
+    {% endfor %}
+
+    <div class="col-xs-12 text-muted text_with_line">Poczekalnia <sup>{{ table_eureka_waiting.data|length }}</sup></div>
+    {% for row in table_eureka_waiting.page.object_list|default:table_eureka_waiting.rows %}
+        {% render_eureka_preview_big row.record %}
+        {% if not forloop.last %}
+            <div class="col-xs-12 text_with_line"></div>
+        {% endif %}
+    {% endfor %}
+
+    <div class="col-xs-12 text-muted text_with_line">Koncepcje <sup>{{ table_concept.data|length }}</sup></div>
+    {% for row in table_concept.page.object_list|default:table_concept.rows %}
+        {% render_concept_preview_medium_extended row.record %}
+        {% if not forloop.last %}
+            <div class="col-xs-12 text_with_line"></div>
+        {% endif %}
+    {% endfor %}
+    <div class="col-xs-12">
+    {% if table_eureka.data|length > table_eureka_waiting.data|length %}
+        {% if table_eureka.data|length > table_concept.data|length %}
+            {% bootstrap_pagination table_eureka.page url=request.get_full_path %}
+        {% else %}
+            {% bootstrap_pagination table_concept.page url=request.get_full_path %}
+        {% endif %}
+    {% else %}
+        {% if table_eureka_waiting.data|length > table_concept.data|length %}
+            {% bootstrap_pagination table_eureka_waiting.page url=request.get_full_path %}
+        {% else %}
+            {% bootstrap_pagination table_concept.page url=request.get_full_path %}
+        {% endif %}
+    {% endif %}
+
+    </div>
+{% endblock %}

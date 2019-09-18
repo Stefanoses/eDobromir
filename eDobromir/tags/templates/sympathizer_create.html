@@ -1,0 +1,34 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load bootstrap3 %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-xs-12 text_with_line text-muted">Dodaj tag sympatyków</div>
+    <div class="col-xs-12">
+        <div class="alert alert-info">
+            Będąc właścicielem tagu, możesz decydować o tym jakie treści będą się w nim pojawiać.
+            Możesz posiadać maksymalnie 10 takich tagów.
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary pull-right">Dodaj tag</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        function format(icon) {
+            var originalOption = icon.element;
+            var $selection = $("<span><i class='fa fa-" + $(originalOption).data('icon') + "'></i> " + icon.text + "</span>");
+            return $selection;
+        }
+
+        $('select').select2({
+            width: "100%",
+            allowClear: true,
+            templateSelection: format,
+            templateResult: format
+        });
+    </script>
+{% endblock %}

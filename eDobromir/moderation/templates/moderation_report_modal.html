@@ -1,0 +1,31 @@
+{% load bootstrap3 %}
+
+<div class="modal" id="content_report_create_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="alert alert-danger">
+                    <strong>Zgłoś treść</strong>
+                </div>
+            </div>
+            <div class="modal-body">
+                {% if not request.user.is_authenticated %}
+                    <div class="alert alert-warning">
+                        Musisz być zalogowanym by móc zgłaszać treści. <a href="{% url 'account_login_signup' %}">Zaloguj się</a>
+                    </div>
+                {% else %}
+                    <form action="" method="POST" id="content_report_create_form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                    </form>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                {% if request.user.is_authenticated %}
+                    <button type="submit" class="btn btn-primary" form="content_report_create_form" id="content_report_create_button">Zgłoś</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

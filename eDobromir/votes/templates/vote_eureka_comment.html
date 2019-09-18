@@ -1,0 +1,18 @@
+{% extends 'vote_eureka_base.html' %}
+{% load moderation_templatetags %}
+
+{% block vote_area_id %}vote_eureka_comment_{{ object.slug }}{% endblock %}
+
+{% block vote_up_url %}{% url 'votes:vote_up_eureka_comment' eureka.slug object.slug %}{% endblock %}
+
+{% block vote_down_url %}{% url 'votes:vote_down_eureka_comment' eureka.slug object.slug %}{% endblock %}
+
+{% block vote_up_link_id %}vote_eureka_comment_{{ object.slug }}{% endblock %}
+
+{% block vote_down_link_id %}vote_eureka_comment_{{ object.slug }}{% endblock %}
+
+{% block vote_count %}{% endblock %}
+
+{% block vote_up_icon %}
+    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+{% endblock %}

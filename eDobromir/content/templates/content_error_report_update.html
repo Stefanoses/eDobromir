@@ -1,0 +1,40 @@
+{% extends 'dashboard_sidebar_base.html' %}
+
+{% load bootstrap3 %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Aktualizacja błędu o id nr.: <strong>{{ object.id }}</strong> dnia <strong>{{ object.created }}</strong></div>
+    <div class="col-xs-12">
+        <p>W czasie wystąpienia błędu pojawia się: <strong>{{ object.error_code }}</strong></p>
+        <p>Błąd występuje tylko wtedy kiedy jestem: <strong>{{ object.error_login_state }}</strong></p>
+        <p>Błąd występuje na stronie (cały link wraz z https://www.): <strong>{{ object.error_link }}</strong></p>
+    </div>
+    <div class="col-xs-12 text-muted text_with_line">Opis błędu:</div>
+    <div class="col-xs-12">
+        <p>
+            {{ object.error_description|safe }}
+        </p>
+        {% if object.error_image %}
+        <img src="{{ object.error_image.url }}" style="max-width: 100%;">
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <form action="{% url 'content:content_error_update' object.id %}" method="POST">
+        {% csrf_token %}
+        <div class="col-xs-12 text-muted text_with_line">Aktualny status</div>
+        <div class="col-xs-12">
+            {% bootstrap_field form.actual_state show_label=False %}
+        </div>
+        <div class="col-xs-12 text-muted text_with_line">Komentarz administratora</div>
+        <div class="col-xs-12">
+            {% bootstrap_field form.comment_admin show_label=False %}
+        </div>
+        <div class="col-xs-12 text-muted text_with_line">Akcje</div>
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary pull-right">Aktualizuj</button>
+        </div>
+    </form>
+{% endblock %}
+

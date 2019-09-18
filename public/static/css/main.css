@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
+*{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+body {
+    background-color: #F2F1EF;
+    overflow-y:scroll; !important;
+}
+
+.blur {
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    -o-filter: blur(8px);
+    -ms-filter: blur(8px);
+    filter: blur(8px);
+    background-color: #F2F1EF;
+}
+
+.logo {
+    font-family: 'Audiowide', cursive;
+}
+
+.top-spacer {
+    display: block;
+    width: 100%;
+    height: 30px;
+}
+
+.link-remove-format{
+    color: inherit;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.link-remove-format:hover{
+    color: inherit;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.instruction_nav .instruction_nav {
+  background: transparent;
+}
+
+.instruction_nav {
+  background: transparent;
+}
+
+.instruction_nav a {
+
+}
+
+.instruction_nav li a:hover,
+.instruction_nav li a:focus {
+  background: transparent;
+}
+
+.instruction_nav .active {
+    font-weight: bold;
+    background: transparent;
+}
+
+.instruction_nav .active a,
+.instruction_nav .active:hover a,
+.instruction_nav .active:focus a {
+    font-weight: bold;
+    border-left: 1px solid #C7254E;
+}
+
+.instruction_nav .instruction_nav {
+    display: none;
+}
+
+.instruction_nav .active .instruction_nav {
+    display: block;
+}
+
+.instruction_nav .instruction_nav a {
+    font-weight: normal;
+    font-size: .85em;
+}
+
+.instruction_nav .instruction_nav span {
+  margin: 0 5px 0 2px;
+}
+
+.instruction_nav .instruction_nav .active a,
+.instruction_nav .instruction_nav .active:hover a,
+.instruction_nav .instruction_nav .active:focus a {
+    font-weight: bold;
+    border-left: 1px solid #C7254E;
+}
+
+.instruction_nav .instruction_nav .active span,
+.instruction_nav .instruction_nav .active:hover span,
+.instruction_nav .instruction_nav .active:focus span {
+  border-left: 1px solid #C7254E;
+}
+
+.affix-top {
+  position: relative;
+}
+
+.affix {
+  top: 40px;
+}
+
+.affix,
+.affix-bottom {
+    width: 213px;
+}
+
+.affix-bottom {
+  position: absolute;
+}
+
+@media (min-width:1200px) {
+  .affix,
+  .affix-bottom {
+    width: 263px;
+  }
+}
+
+textarea {
+    resize:vertical;
+}
+
+.django-ckeditor-widget {
+    max-width: 100%;
+}
+
+.row-no-padding > [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.row-right-no-padding > [class*="col-"] {
+    padding-left: 0 !important;
+}
+
+.row-left-no-padding > [class*="col-"] {
+    padding-right: 0 !important;
+}
+
+.control-label {
+    color: #777; !important;
+    font-size: 12px;
+}
+
+.link-tab {
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.link-tab i {
+    color: #777;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.link-tab:hover{
+    color: #C7254E;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.link-tab:hover i{
+    color: #C7254E;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.link-tab-active {
+    color: #C7254E;
+}
+
+.link-tab-active i {
+    color: #C7254E;
+}
+
+
+.anchor {
+    padding-top: 50px;
+    margin-top: -50px;
+}
+
+.label-group>.label:first-child {
+	border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0;
+}
+
+.label-group>.label:nth-child(2) {
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 0;
+    filter: alpha(opacity=70);
+    opacity: 1;
+}
+
+.text_with_line {
+    border-bottom: #DDD solid 1px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.horizontal_line {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: #DDD;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#content_bg_eureka:after {
+  content: "\f0eb";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  position: absolute;
+  font-size: 300px;
+  color: #FFF;
+  top: 50%;
+  left: 50%;
+  margin: -230px 0 0 -200px;
+  z-index: -1;
+}
+
+#content_bg_concept:after {
+  content: "\f10c";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  position: absolute;
+  font-size: 300px;
+  color: #FFF;
+  top: 50%;
+  left: 50%;
+  margin: -230px 0 0 -200px;
+  z-index: -1;
+}

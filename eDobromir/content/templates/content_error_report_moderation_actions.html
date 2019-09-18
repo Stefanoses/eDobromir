@@ -1,0 +1,11 @@
+{% load guardian_tags %}
+
+{% if has_perm %}
+    <div class="col-xs-12 text-muted text_with_line">Akcje moderatora</div>
+    <div class="col-xs-12">
+        <div class="btn-group pull-right">
+            <a href="{% url 'content:content_error_update' error.id %}" class="btn btn-default">Aktualizuj</a>
+            <a href="{% url 'content:content_error_delete' error.id %}" class="btn btn-danger">Usuń</a>
+        </div>
+    </div>
+{% endif %}

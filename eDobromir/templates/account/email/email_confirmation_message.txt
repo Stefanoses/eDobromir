@@ -1,0 +1,7 @@
+Witamy, zarejestrowałeś się na eDobromir.pl
+
+Aby dokończyć proces rejestracji proszę potwierdzić swój adres e-mail wchodząc na poniższy link.
+
+{{ activate_url }}
+
+Dziękujemy w imieniu całej drużyny eDobromir.pl

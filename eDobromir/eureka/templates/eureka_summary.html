@@ -1,0 +1,68 @@
+{% extends 'dashboard_sidebar_recent.html' %}
+{% load static %}
+{% load imagekit %}
+{% load bootstrap3 %}
+{% load eureka_templatetags %}
+
+{% block title %}Podsumowanie{% endblock %}
+
+{% block recent_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">
+        Eureka
+        <span class="pull-right">
+            <a href="{% url 'eureka:eureka_update' slug=eureka.slug %}" class="link-tab"><small><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj </small></a>
+            <a href="{% url 'eureka:eureka_detail' slug=eureka.slug %}" class="link-tab"><small><i class="fa fa-search" aria-hidden="true"></i> Podgląd</small></a>
+        </span>
+    </div>
+    <div class="col-xs-12">
+        {% render_eureka_preview_big eureka %}
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line">
+        Instrukcja
+        <span class="pull-right">
+            <a href="{% url 'eureka:eureka_instruction_step_create' slug=eureka.slug %}" class="link-tab"><small><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj </small></a>
+            <a href="{% url 'eureka:eureka_instruction_detail' slug=eureka.slug %}" class="link-tab"><small><i class="fa fa-search" aria-hidden="true"></i> Podgląd</small></a>
+        </span>
+    </div>
+    <div class="col-xs-12">
+        <div class="clearfix row-no-padding">
+            {% if not eureka.eurekaInstruction.steps.count > 0 %}
+                <div class="alert alert-warning">
+                    Twoja eureka nie posiada instrukcji, nie jest ona wymagana do jej opublikowania.
+                </div>
+                <a href="{% url 'eureka:eureka_instruction_step_create' slug=eureka.slug %}" class="btn btn-primary pull-right">Dodaj instrukcję</a>
+            {% else %}
+                <div class="col-xs-6">
+                    <ul class="instruction_nav nav ">
+                        {% for step in eureka.eurekaInstruction.steps.all %}
+                            <li>
+                                <a href="{% url 'eureka:eureka_instruction_step_update' slug=eureka.slug step_slug=step.step_slug %}">Krok {{ forloop.counter }}:  {{ step.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-xs-6">
+                    Ilość kroków: {{ eureka.eurekaInstruction.steps.count }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-xs-12 text-muted text_with_line"></div>
+    <div class="col-xs-12">
+        {% if not eureka.is_published %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="alert alert-warning">
+                    Po opublikowani eureki, będzie ją można dalej edytować.
+                </div>
+                <button class="btn btn-primary pull-right" type="submit">Opublikuj</button>
+            </form>
+        {% else %}
+            <div class="alert alert-success">
+                Twoja eureka jest publiczna. Znajdziesz ją pod tym linkiem:
+                <a href="{% url 'eureka:eureka_detail' eureka.slug %}">{% url 'eureka:eureka_detail' eureka.slug %}</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load bootstrap3 %}
+
+<div class="modal" id="reply_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% if not request.user.is_authenticated %}
+                    <div class="alert alert-warning">
+                        Musisz być zalogowanym by móc odpowiadać na komentarze. <a href="{% url 'account_login_signup' %}">Zaloguj się</a>
+                    </div>
+                {% else %}
+                    <form action="" method="POST" id="reply_form">
+                        {% csrf_token %}
+                        {% bootstrap_form form show_label=False %}
+                    </form>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                {% if request.user.is_authenticated %}
+                    <button type="submit" class="btn btn-primary" form="reply_form" id="reply_comment_button">Odpowiedz</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

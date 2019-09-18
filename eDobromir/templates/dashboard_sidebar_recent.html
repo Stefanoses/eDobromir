@@ -1,0 +1,50 @@
+{% extends 'dashboard_sidebar_base.html' %}
+{% load tags_templatetags %}
+{% load profile_account_templatetags %}
+
+
+{% block content_sidebar_top %}
+    {% block recent_content_sidebar_top %}
+    {% endblock %}
+{% endblock %}
+
+{% block content_sidebar_left %}
+    {% block recent_content_sidebar_left %}
+    {% endblock %}
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text_with_line text-muted">
+        Tagi
+        <span class="pull-right">
+            <small>
+                <a href="{% url 'tags:tag_list' %}" class="link-tab"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+            </small>
+        </span>
+    </div>
+    {% render_tags_most_popular 30 %}
+
+    <div class="col-xs-12 text_with_line text-muted">
+        Sympatycy
+        <span class="pull-right">
+            <small>
+                <a href="{% url 'tags:sympathizer_create' %}" class="link-tab"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                <a href="{% url 'tags:sympathizer_list' %}" class="link-tab"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+            </small>
+        </span>
+    </div>
+    {% render_sympathizer_most_popular 30 %}
+
+    {% block content_sidebar_right_extended %}
+    {% endblock %}
+
+    <div class="col-xs-12 text_with_line text-muted">
+        Użytkownicy
+        <span class="pull-right">
+            <small>
+                <a href="{% url 'account_rank' %}" class="link-tab"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+            </small>
+        </span>
+    </div>
+    {% render_profile_list 5 %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "dashboard_one_column_base.html" %}
+
+{% load i18n %}
+
+{% block head %}Logowanie anulowane{% endblock %}
+
+{% block content_column %}
+    <div class="col-xs-12 text-muted text_with_line">Logowanie anulowane</div>
+    <div class="col-xs-12">
+        {% url 'account_login' as login_url %}
+        Zdecydowałeś się anulować logowanie przez jedno z istniejących kont. Jeżeli to była pomyłka, proszę przejdź do <a href="{{login_url}}">sign in</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'eureka_base.html' %}
+{% load static %}
+{% load imagekit %}
+{% load eureka_templatetags %}
+{% load comments_templatetags %}
+{% load tags_linked %}
+{% load tags_vote %}
+{% load moderation_templatetags %}
+{% load diary_templatetags %}
+
+{% block info_content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line">Eureka</div>
+    {% render_eureka_preview_big_link_to_instruction object %}
+
+    <div class="col-xs-12 text-muted">Komentarze</div>
+    <div class="col-xs-12">
+        {% render_comments_tree_eureka eureka %}
+    </div>
+    <div class="col-xs-12 text-muted text_with_line">Napisz komentarz</div>
+    <div class="col-xs-12">
+        {% render_comments_create %}
+    </div>
+    {% render_comments_reply %}
+{% endblock %}
+
+{% block info_content_sidebar_right %}
+    <div class="col-xs-12 text_with_line text-muted">Informacje</div>
+    <div class="col-xs-12">
+        {% render_diary_detail eureka %}
+        {% render_vote_detail eureka %}
+        {% render_moderation_report_detail eureka %}
+    </div>
+
+    <div class="col-xs-12 text_with_line text-muted">Podobne</div>
+    {% render_similar_eureka_list eureka 3 %}
+    {% render_linked_eureka_list eureka %}
+    {% render_linked_eureka_create eureka %}
+{% endblock %}

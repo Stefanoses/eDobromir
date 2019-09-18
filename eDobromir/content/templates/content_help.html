@@ -1,0 +1,78 @@
+{% extends 'dashboard_sidebar_base.html' %}
+
+{% block content_sidebar_left %}
+    <div class="col-xs-12 text-muted text_with_line" id="step_0">Czym jest serwis eDobromir?</div>
+    <div class="col-xs-12">
+        <p>
+            eDobromir to miejsce dla entuzjastów w każdym tego słowa znaczeniu.
+            Nie ważne czy jesteś programistą czy też ogrodnikiem, na pewno twoja wiedza przyda się innym.
+        </p>
+        <p>
+            Możesz podzielić się swoim doświadczeniem w postaci publikacji ciekawych atykułów czy też filmów jako poradnik do eureki czy też dyskusji w koncepcji.
+        </p>
+        <p>
+            Całość jest otagowana w taki sposób by w łatwo można było znaleźć temat na który szukamy odpowiedzi.
+            Co więcej instnieją odesparowane grupy na stronie tak zwani entuzjaści którzy są sympatykami danego tematu.
+            Dzięki temu możesz się skupić na tym co cie naprawdę interesuje oraz tworzyć swoje własne grupy którymi zarządzasz.
+        </p>
+    </div>
+    <div class="col-xs-12 text-muted text_with_line" id="step_1">Geneza</div>
+    <div class="col-xs-12">
+        <p>
+            eDobromir jest jawnym nawiązaniem do niegdyś popularnego serialu animowanego Pomysłowy Dobromir.
+            Nasz portal jest internetową interpretacją.
+        </p>
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line" id="step_2">Czym jest Eureka?</div>
+    <div class="col-xs-12">
+        <p>
+            Eureka to coś przełomowego, plan wykonania, instrukcja, czy też ciekawostka.
+            Nie ważne czy jesteś programistą, ogrodnikiem czy też kucharzem,
+            na pewno jest coś w Twoim zawodzie co potrafisz tylko Ty lub też zajmesz się tym hobbistycznie, a chciałbyś podzielić się tym z innymi.
+        </p>
+        <p>
+            Możesz zamieścić już gotowe rozwiązanie, w postaci linku do artykułu czy też filmu.
+            Natomiast jeśli wolisz napisać coś od siebie, narzędzia na tej stronie pozwolą Ci w łatwy sposób to zrobić.
+        </p>
+    </div>
+
+    <div class="col-xs-12 text-muted text_with_line" id="step_4">Czym jest Koncepcja?</div>
+    <div class="col-xs-12">
+        <p>
+            Koncepcja jest zalążkiem, początkiem do dyskusji.
+            Jeśli nie jesteś pewien czy poradnik który chcesz napisać przyda się komuś, zapytaj.
+            Masz może problem w jakiejś dziedzinie, my ci pomożemy.
+            Chciałbyś napisać coś ciekawego ze świata, na pewno nas to zainteresuje.
+            Możesz się z nami podzielić każdą myślą.
+        </p>
+        <p>
+            Pamiętaj o odpowiednim otagowaniu swojej koncepcji (np.: robotyka), w ten sposób większa grupa osób zainteresowanych tym tematem co Ty, zobaczy ten pomysł, i będzie mogła Ci pomóc.
+        </p>
+    </div>
+{% endblock %}
+
+{% block content_sidebar_right %}
+    <div class="col-xs-12 text-muted text_with_line">Menu</div>
+    <div class="col-xs-12">
+        <ul id="nav" class="instruction_nav nav hidden-xs hidden-sm" data-spy="affix">
+            <li><a href="#step_0">Czym jest serwis eDobromir?</a></li>
+            <li><a href="#step_1">Geneza</a></li>
+            <li><a href="#step_2">Czym jest Eureka?</a></li>
+            <li><a href="#step_3">Czym jest Koncepcja?</a></li>
+        </ul>
+        <div id="affix-stop" style="height:10px;"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav').affix({
+            offset: {
+              top: $('#nav').offset().top,
+              bottom: ($('#footer').outerHeight(true)) + 40,
+            }
+        });
+        $("#instruction_content").css("height", $('#instruction_content').outerHeight(true));
+    </script>
+{% endblock %}

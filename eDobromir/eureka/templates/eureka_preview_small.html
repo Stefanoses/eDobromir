@@ -1,0 +1,29 @@
+{% load tags_vote %}
+{% load tags_templatetags %}
+{% load profile_account_templatetags %}
+
+<div class="col-xs-12">
+    <div class="clearfix row-no-padding">
+        <div class="col-xs-4">
+            <a href="{% url 'eureka:eureka_detail' eureka.slug %}" class="link-remove-format link-tab">
+                <img src="{{ eureka.preview_image_thumbnail.url }}" class="img-responsive" style="padding-right: 5px;">
+            </a>
+        </div>
+        <div class="col-xs-8">
+            <strong><a href="{% url 'eureka:eureka_detail' eureka.slug %}" class="link-remove-format">{{ eureka.title }}</a></strong>
+            <br/>
+            <small class="text-muted">
+                @{% render_profile_username eureka.created_by %}
+                {% if eureka.sympathizers %}
+                    {% render_sympathizer_preview_less eureka.sympathizers.name %}
+                {% endif %}
+                {% for tag in eureka.tags.all %}
+                    {% render_tag_preview_less tag %}
+                {% endfor %}
+                <span style="white-space:nowrap;"><i class="fa fa-comments" aria-hidden="true"></i> {{ eureka.comments.count }}</span>
+                <span style="white-space:nowrap;"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> {{ eureka.votes.count }}</span>
+            </small>
+        </div>
+    </div>
+    <br/>
+</div>
